@@ -1,5 +1,6 @@
 const express = require("express");
 const db =  require("./projects-model");
+const { validateProject } = require("../middleware/middleware")
 
 const router = express.Router();
 
@@ -17,6 +18,14 @@ router.get("/:id", (req, res, next) => {
             res.json(project);
         })
         .catch(next)
-})
+});
+
+router.post("/", validateProject(), (req, res, next) => {
+    db.insert(req.body)
+        .then(project => {
+            res.json(project);
+        })
+        .catch(next)
+});
 
 module.exports = router;
