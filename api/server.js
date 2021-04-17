@@ -1,8 +1,10 @@
-const express = require('express');
+const express = require("express");
 const projectsRouter = require("./projects/projects-router");
 const actionsRouter = require("./actions/actions-router");
-
+const { logger } = require("./middleware/middleware");
 const server = express();
+
+server.use(logger())
 
 server.get("/", (req, res) => {
     res.send(`<h1>API Available</h1>`);
