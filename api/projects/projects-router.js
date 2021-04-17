@@ -1,6 +1,6 @@
 const express = require("express");
 const db =  require("./projects-model");
-const { validateProject } = require("../middleware/middleware")
+const { validateProject, validateID } = require("../middleware/middleware")
 
 const router = express.Router();
 
@@ -12,12 +12,8 @@ router.get("/", (req, res, next) => {
         .catch(next)
 });
 
-router.get("/:id", (req, res, next) => {
-    db.get(req.params.id)
-        .then(project => {
-            res.json(project);
-        })
-        .catch(next)
+router.get("/:id", validateID(), (req, res) => {
+    res.json(req.project);
 });
 
 router.post("/", validateProject(), (req, res, next) => {

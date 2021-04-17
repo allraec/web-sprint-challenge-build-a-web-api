@@ -26,7 +26,7 @@ function validateID() {
         dbProj.get(req.params.id)
             .then(project => {
                 if(project){
-                    req.user = project;
+                    req.project = project;
                     next();
                 }else{
                     res.status(404).json({
