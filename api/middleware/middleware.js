@@ -21,7 +21,25 @@ function validateProject() {
     }
 }
 
+function validateID() {
+    return (req, res, next) => {
+        dbProj.get(req.params.id)
+            .then(project => {
+                if(project){
+                    req.user = project;
+                    next();
+                }else{
+                    res.status(404).json({
+						message: "ID not found.",
+					})
+                }
+            })
+            .catch(next)
+    }
+}
+
 module.exports = {
     logger,
-    validateProject
+    validateProject,
+    validateID
 }
