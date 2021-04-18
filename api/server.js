@@ -11,8 +11,8 @@ server.get("/", (req, res) => {
 });
 
 server.use(express.json());
-server.use("/api/projects/", projectsRouter);
-//server.use(actionsRouter);
+server.use("/api/projects", projectsRouter);
+server.use("/api/actions", actionsRouter);
 
 server.use((err, req, res, next) => {
     console.log(err)
