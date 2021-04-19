@@ -1,6 +1,14 @@
-const server = require("./api/server");
+require('dotenv').config()
+require('dotenv/config')
 
-const port = 8080
+const server = require("./api/server");
+const helmet = require("helmet")
+const cors = require("cors")
+
+const port = process.env.PORT || 8080	
+server.use(helmet())
+server.use(cors())
+
 server.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
-});
+	console.log(`running at http://localhost:${port}`)
+})
