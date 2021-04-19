@@ -52,4 +52,14 @@ router.delete("/:id", validateProjectID(), (req, res, next) => {
         })
         .catch(next)
 })
+
+// get request that displays all actions of a specified project id
+router.get("/:id/actions", (req, res, next) => {
+    db.getProjectActions(req.params.id)
+        .then(actions => {
+            res.json(actions);
+        })
+        .catch(next)
+});
+
 module.exports = router;
